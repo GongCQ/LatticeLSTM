@@ -1,8 +1,14 @@
 python main.py --status train \
-		--train ../data/onto4ner.cn/train.char.bmes \
-		--dev ../data/onto4ner.cn/dev.char.bmes \
-		--test ../data/onto4ner.cn/test.char.bmes \
-		--savemodel ../data/onto4ner.cn/saved_model \
+		--train ./data/demo.train.char \
+		--dev ./data/demo.dev.char \
+		--test ./data/demo.test.char \
+		--savemodel ./data/saved_model \
+
+#python main.py --status train \
+#		--train ../data/onto4ner.cn/train.char.bmes \
+#		--dev ../data/onto4ner.cn/dev.char.bmes \
+#		--test ../data/onto4ner.cn/test.char.bmes \
+#		--savemodel ../data/onto4ner.cn/saved_model \
 
 
 # python main.py --status decode \

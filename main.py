@@ -3,7 +3,8 @@
 # @Date:   2017-06-15 14:11:08
 # @Last Modified by:   Jie Yang,     Contact: jieynlp@gmail.com
 # @Last Modified time: 2018-07-06 11:08:27
-
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 import time
 import sys
 import argparse

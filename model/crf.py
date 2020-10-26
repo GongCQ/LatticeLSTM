@@ -72,7 +72,7 @@ class CRF(nn.Module):
         seq_iter = enumerate(scores)
         _, inivalues = seq_iter.next()  # bat_size * from_target_size * to_target_size
         # only need start from start_tag
-        partition = inivalues[:, START_TAG, :].clone().view(batch_size, tag_size, 1)  # bat_size * to_target_size
+        partition = inivalues[:, START_TAG, :].clone().view(batch_size, tag_size)  # bat_size * to_target_size
 
         ## add start score (from start to all tag, duplicate to batch_size)
         # partition = partition + self.transitions[START_TAG,:].view(1, tag_size, 1).expand(batch_size, tag_size, 1)
@@ -93,7 +93,7 @@ class CRF(nn.Module):
             ## effective updated partition part, only keep the partition value of mask value = 1
             masked_cur_partition = cur_partition.masked_select(mask_idx)
             ## let mask_idx broadcastable, to disable warning
-            mask_idx = mask_idx.contiguous().view(batch_size, tag_size, 1)
+            mask_idx = mask_idx.contiguous().view(batch_size, tag_size)
 
             ## replace the partition where the maskvalue=1, other partition value keeps the same
             partition.masked_scatter_(mask_idx, masked_cur_partition)  
@@ -140,7 +140,7 @@ class CRF(nn.Module):
         mask =  (1 - mask.long()).byte()
         _, inivalues = seq_iter.next()  # bat_size * from_target_size * to_target_size
         # only need start from start_tag
-        partition = inivalues[:, START_TAG, :].clone().view(batch_size, tag_size, 1)  # bat_size * to_target_size
+        partition = inivalues[:, START_TAG, :].clone().view(batch_size, tag_size)  # bat_size * to_target_size
         partition_history.append(partition)
         # iter over last scores
         for idx, cur_values in seq_iter:
